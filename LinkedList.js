@@ -105,7 +105,16 @@ class LinkedList {
     let str = "";
     let current = this.headNode;
     while (current) {
-      str += `( ${current.value} ) -> `;
+      if (
+        current.value &&
+        typeof current.value === "object" &&
+        "key" in current.value &&
+        "value" in current.value
+      ) {
+        str += `( ${current.value.key}: ${current.value.value} ) -> `;
+      } else {
+        str += `( ${current.value} ) -> `;
+      }
       current = current.nextNode;
     }
     return str + "null";
